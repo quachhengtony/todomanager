@@ -1,0 +1,21 @@
+version: "3"
+name: todomanager
+networks:
+  todomanager_network:
+    driver: bridge
+services:
+  todomanager_db:
+    container_name: todomanager_mysql
+    image: mysql:8.0.30
+    ports:
+      - 3306:3306
+    networks:
+      - todomanager_network
+    environment:
+      MYSQL_ROOT_PASSWORD: Password1234
+      MYSQL_DATABASE: todomanager
+    volumes:
+      - todomanager_data:/var/lib/mysql
+volumes:
+  todomanager_data:
+    driver: local
